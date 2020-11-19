@@ -1,31 +1,32 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { get, post } from "./modules/rest";
 import "./App.css";
 import Main from "./components/Main";
 
 function App() {
-  const [cards, setCards] = useState([
-    {
-      task: "clean room",
+  const [cards, setCards] = useState([]);
+
+  function cardAdded(task) {
+    console.log(task);
+    const payload = {
+      task,
+      highlight: false,
       list: "todo",
-      highlight: true,
-    },
-    {
-      task: "Learn Vue",
-      list: "doing",
-      highlight: true,
-    },
-    {
-      task: "Learn React",
-      list: "done",
-      highlight: true,
-    },
-  ]);
+    };
+    post(payload, cards, setCards);
+  }
+
+  useEffect(() => {
+    get(setCards);
+  }, []);
+
   const addCard = () => {
     setCards(
       cards.concat({
         task: "Learn Angular",
         list: "todo",
         highlight: false,
+        _id: Math.random(),
       })
     );
   };
@@ -34,7 +35,7 @@ function App() {
       <button onClick={addCard}>Add card</button>
       <div className="App">
         <Nav />
-        <Main cards={cards} />
+        <Main cardAdded={cardAdded} cards={cards} />
       </div>
     </>
   );
