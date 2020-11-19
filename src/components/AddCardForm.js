@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import ReactDOM from "react-dom";
 import Button from "muicss/lib/react/button";
 import Input from "muicss/lib/react/input";
 

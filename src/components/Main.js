@@ -1,7 +1,6 @@
 import React from "react";
 import ListContainer from "./ListContainer";
 
-import ReactDOM from "react-dom";
 import Panel from "muicss/lib/react/panel";
 export default function Main(props) {
   const todoList = props.cards.filter((card) => card.list === "todo");
